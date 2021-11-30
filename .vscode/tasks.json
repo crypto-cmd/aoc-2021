@@ -1,0 +1,32 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    // Task to run ./runner.sh
+    {
+      "label": "Run AOC Script",
+      "type": "shell",
+      "command": "./runner.sh",
+      "group": "build",
+      "presentation": {
+        "reveal": "always"
+      }
+    },
+    {
+      "label": "Run AOC Script: Specific Day",
+      "type": "shell",
+      "command": "./runner.sh ${input:day}",
+
+      "group": "build",
+      "presentation": {
+        "reveal": "always"
+      }
+    },
+  ],
+  "inputs": [
+    {
+      "id": "day",
+      "type": "promptString",
+      "description": "Day to run"
+    }
+  ]
+}
