@@ -1,13 +1,11 @@
-import { FileReader } from "../lib/FileReader";
+import { readLines } from "../lib/utils";
 /**
  * Slide a window and sum the numbers in it. Move the window. Count the number of times the new sum is greater than the old sum.
  * Time: O(n)
  * Space: O(1) excluding the input array
  */
-export const solution = () => {
-  const depths = new FileReader("./src/day01/input.txt")
-    .readLines()
-    .map(Number);
+export const solution = async() => {
+  const depths = (await readLines("./src/day01/input.txt")).map(Number);
   let window = [0, 1, 2];
   let count = 0;
   while (window[2] <= depths.length) {
@@ -30,5 +28,5 @@ export const solution = () => {
   return count; // Answer: 1257
 };
 if (require.main === module) {
-  console.log(solution());
+  solution().then(console.log);
 }

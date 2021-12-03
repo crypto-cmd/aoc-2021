@@ -1,14 +1,12 @@
-import { FileReader } from "../lib/FileReader";
+import { readLines } from "../lib/utils";
 
 /**
  * Count how many times there was an increase in depth
  * Time: O(n)
  * Space: O(1) excluding the input array
  */
-export const solution = () => {
-  const depths = new FileReader("./src/day01/input.txt")
-    .readLines()
-    .map(Number);
+export const solution = async () => {
+  const depths = (await readLines("./src/day01/input.txt")).map(Number);
   return depths.reduce((acc, curr, index) => {
     const previousDepth = depths[index - 1] ?? Infinity;
     if (curr > previousDepth) {
@@ -18,5 +16,5 @@ export const solution = () => {
   }, 0); // Solution: 1228
 };
 if (require.main === module) {
-  console.log(solution());
+  solution().then(console.log);
 }
