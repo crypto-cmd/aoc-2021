@@ -5,14 +5,21 @@ export class Grid<T> {
   private data: Map<GridCoordinate, T> = new Map();
   private rows: number = 0;
   private columns: number = 0;
+  getNumRows() {
+    return this.rows;
+  }
+  getNumColumns() {
+    return this.columns;
+  }
+
   get(coordinates: GridCoordinate): T | undefined {
     return this.data.get(coordinates);
   }
   set(coordinates: GridCoordinate, value: T): void {
     this.data.set(coordinates, value);
     const [row, column] = coordinates.split(",").map(Number);
-    this.rows = Math.max(this.rows, row);
-    this.columns = Math.max(this.columns, column);
+    this.rows = Math.max(this.rows, row + 1);
+    this.columns = Math.max(this.columns, column + 1);
   }
   has(coordinates: GridCoordinate): boolean {
     return this.data.has(coordinates);
@@ -52,9 +59,9 @@ export class Grid<T> {
   }
   print() {
     console.log();
-    for (let row = 0; row <= this.rows; row++) {
+    for (let row = 0; row < this.rows; row++) {
       let rowString = "";
-      for (let column = 0; column <= this.columns; column++) {
+      for (let column = 0; column < this.columns; column++) {
         const value = this.get(`${row},${column}`);
         if (value instanceof ColourCodedGridCell) {
           rowString += `${value.toString()}`;
