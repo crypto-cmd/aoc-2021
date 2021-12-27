@@ -1,0 +1,3 @@
+interface PrintAble {
+  print(): void;
+}
